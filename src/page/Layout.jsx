@@ -7,9 +7,10 @@ const Layout = () => {
 
 
     <div className={` flex w-screen h-screen `}>
-        <div className='px-10 bg-slate-100 flex flex-col '>
+        <div className='w-[200px] items-center gap-5 bg-slate-100 flex flex-col '>
             <NavLink to={'/'} className={''} >Home</NavLink>
-            <NavLink to={'list'} className={''} >List Mahasiswa</NavLink>
+            <NavLink to={'list'} className={''} >Data Mhs</NavLink>
+            <NavLink to={'message'} className={''} >Message</NavLink>
         </div>
         <div className='p-3 w-full'>
             <Outlet/>
