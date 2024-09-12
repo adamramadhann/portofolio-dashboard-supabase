@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import supabase from '../supabase'
-import { Button, Form, Input, Modal, Table } from 'antd'
+import { Button, Form, Input, message, Modal, Table } from 'antd'
 import { useQuery } from '@tanstack/react-query'
 import { useForm } from 'antd/es/form/Form'
 import { Chance } from 'chance'
-import FormSubmit from '../components/FormSubmit'
+import {  useNavigate } from 'react-router-dom'
 
 const LIstMahasiswa = () => {
 
@@ -12,6 +12,8 @@ const LIstMahasiswa = () => {
     const [dataEdit, setDataEdit] = useState(null)
     const [isOpenModal, setIsOpenModal] = useState(false)
     const [form] = useForm()
+
+    const navigate = useNavigate()
 
 
     const chance = new Chance()
@@ -73,6 +75,13 @@ const LIstMahasiswa = () => {
                 <div className=' flex gap-3 '>
                     <Button type='primary' htmlType='submit' onClick={() => handleOpenModal(e)} >Edit</Button>
                     <Button type='secondary' className='bg-red-500 text-white' onClick={() => handleDelete(e.id)} >Delete</Button>
+                    {
+                      e.messages.length > 0 && (
+                        <Button onClick={()=> {
+                          navigate(`/detailMessage?id=${e.id}&nama=${e.nama}`)
+                        }} >Message</Button>
+                      )
+                    }
                 </div>
             )
         }
@@ -151,9 +160,13 @@ function handleDeleteSelect() {
         queryKey : ['read_data'],
         queryFn : async () => {
             try {
-                const {data, error} = await supabase.from('mahasiswa').select('*').order('id', { ascending : false })
+                const {data, error} = await supabase
+                .from('mahasiswa')
+                .select('*, messages(*)', {count : 'exact'})
+                .order('id', { ascending : false })
+                
                 if(error) {
-                    return Response.status(500)
+                  throw error
                 }
                 return data
             } catch (error) {
