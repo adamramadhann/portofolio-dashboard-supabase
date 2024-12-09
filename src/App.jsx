@@ -5,16 +5,19 @@
 import Messages from './page/message/Messages'
 import FormMessage from './page/message/FormMessage'
 import DetailMessage from './page/message/DetailMessage'
+import HomeScreen from './page/HomeScreen'
+import UserProfile from './page/UserProfile'
 
   const App = () => {
     return (
       <Routes>
         <Route path='/' element={<Layout/>} > 
-          <Route index element={<h1>home</h1>} />
+          <Route index element={<HomeScreen/>} />
           <Route path='list' element={<LIstMahasiswa/>} />
           <Route path='message' element={<Messages/>} />
           <Route path='formMessage' element={<FormMessage/>} />
           <Route path='detailMessage' element={<DetailMessage/>} />
+          <Route path='profile' element={<UserProfile/>} />
         </Route>
       </Routes>
     )

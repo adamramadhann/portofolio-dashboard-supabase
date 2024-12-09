@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.custom-ant-table .ant-table {
+    @apply border border-gray-300  overflow-hidden;
+  }
+  
+  .custom-ant-table .ant-table-thead > tr > th {
+    @apply bg-gray-100 text-gray-700 text-center font-semibold px-4 py-5;
+  }
+  
+  .custom-ant-table .ant-table-tbody > tr > td {
+    @apply text-center px-4 py-3 border p-2 ;
+  }
+  
+  .custom-ant-table .ant-table-tbody > tr:hover {
+    @apply bg-gray-50;
+  }
+  
+  .custom-ant-table .ant-table-bordered .ant-table-cell {
+    @apply border-gray-300;
+  }
+  
